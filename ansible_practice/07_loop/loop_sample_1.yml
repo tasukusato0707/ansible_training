@@ -1,0 +1,16 @@
+---
+- name: sample1
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    dir_names:
+      - loop_dir1
+      - loop_dir2
+
+  tasks:
+    - name: make directory
+      file:
+        path: /home/ec2-user/ansible_on_vyos/ansible_practice/07_loop/{{ item }}
+        state: directory
+      loop: "{{ dir_names }}"

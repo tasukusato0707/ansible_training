@@ -1,0 +1,24 @@
+---
+- name: output_show_commands
+  hosts: localhost
+  gather_facts: false
+  vars:
+    __vyos:
+      - vyos01
+      - vyos02
+  tasks:
+    - name: "Make before after directory"
+      ansible.builtin.file:
+        path: "/home/ec2-user/ansible_on_vyos/ansible_practice/08_general-practice/before/{{ item }}"
+        state: directory
+        mode: 0644
+      loop: "{{ __vyos }}"
+
+    - name: "Make before after directory"
+      ansible.builtin.file:
+        path: "/home/ec2-user/ansible_on_vyos/ansible_practice/08_general-practice/after/{{ item }}"
+        state: directory
+        mode: 0644
+      loop:
+        - vyos01
+        - vyos02

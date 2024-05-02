@@ -1,0 +1,16 @@
+---
+- name: sample
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    sample_handson: テスト文です 
+
+  tasks:
+    - name: copy text file
+      ansible.builtin.copy:
+        content: "{{ sample_handson }}"
+        dest: /home/ec2-user/ansible_on_vyos/ansible_practice/04-2_copy_file/copy_directory/handson.txt
+
+# copy_directoryとhandson.txtを作らないとアカン
+# copy_module_sample.ymlを作らないとアカン

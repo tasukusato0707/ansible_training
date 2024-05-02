@@ -1,0 +1,23 @@
+---
+- name: exam3
+  hosts: vyos
+  gather_facts: false
+
+  tasks:
+    - name: "setting interfaces description"
+      vyos.vyos.vyos_config:
+        lines:
+          - set interfaces ethernet {{ item.ethernet }} description {{ item.description }}
+      loop: 
+        - { ethernet: 'eth1', description: 'loop_test1' }
+        - { ethernet: 'eth2', description: 'loop_test2' }
+
+    - name: "check interfaces description"
+      vyos.vyos.vyos_command:
+        commands:
+          - show interfaces
+      register: "show_status" 
+
+    - name: "debug interfaces description" 
+      ansible.builtin.debug:
+        var: show_status.stdout_lines

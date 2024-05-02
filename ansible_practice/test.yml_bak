@@ -1,0 +1,15 @@
+---
+- name: link_bypass
+  hosts: vyos
+  gather_facts: false
+
+  tasks:
+    - name: "Get show version"
+      vyos.vyos.vyos_command:
+        commands:
+          - "show version"
+      register: res_show_version
+
+    - name: "Debug res_show_version"
+      ansible.builtin.debug:
+        var: res_show_version.stdout_lines

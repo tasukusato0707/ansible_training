@@ -1,0 +1,38 @@
+{
+  "changed": false,
+  "failed": false,
+  "stdout": [
+    "Codes: S - State, L - Link, u - Up, D - Down, A - Admin Down\nInterface        IP Address                        S/L  Description\n---------        ----------                        ---  -----------\neth0             10.0.0.3/24                       u/u  \neth1             192.168.1.253/24                  u/u  \neth2             192.168.2.253/24                  u/u  \nlo               127.0.0.1/8                       u/u",
+    "Codes: K - kernel route, C - connected, S - static, R - RIP,\n       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,\n       T - Table, v - VNC, V - VNC-Direct, A - Babel, D - SHARP,\n       F - PBR, f - OpenFabric,\n       > - selected route, * - FIB route, q - queued, r - rejected, b - backup\n\nK>* 0.0.0.0/0 [0/0] via 10.0.0.1, eth0, 00:03:22\nC>* 10.0.0.0/24 is directly connected, eth0, 00:03:22\nC>* 192.168.1.0/24 is directly connected, eth1, 00:03:22\nC>* 192.168.2.0/24 is directly connected, eth2, 00:03:22",
+    "Name          Interface      VRID  State      Priority  Last Transition\n------------  -----------  ------  -------  ----------  -----------------\nservice_nw01  eth1             10  BACKUP          100  5s\nservice_nw02  eth2             20  BACKUP          100  5s"
+  ],
+  "stdout_lines": [
+    [
+      "Codes: S - State, L - Link, u - Up, D - Down, A - Admin Down",
+      "Interface        IP Address                        S/L  Description",
+      "---------        ----------                        ---  -----------",
+      "eth0             10.0.0.3/24                       u/u  ",
+      "eth1             192.168.1.253/24                  u/u  ",
+      "eth2             192.168.2.253/24                  u/u  ",
+      "lo               127.0.0.1/8                       u/u"
+    ],
+    [
+      "Codes: K - kernel route, C - connected, S - static, R - RIP,",
+      "       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,",
+      "       T - Table, v - VNC, V - VNC-Direct, A - Babel, D - SHARP,",
+      "       F - PBR, f - OpenFabric,",
+      "       > - selected route, * - FIB route, q - queued, r - rejected, b - backup",
+      "",
+      "K>* 0.0.0.0/0 [0/0] via 10.0.0.1, eth0, 00:03:22",
+      "C>* 10.0.0.0/24 is directly connected, eth0, 00:03:22",
+      "C>* 192.168.1.0/24 is directly connected, eth1, 00:03:22",
+      "C>* 192.168.2.0/24 is directly connected, eth2, 00:03:22"
+    ],
+    [
+      "Name          Interface      VRID  State      Priority  Last Transition",
+      "------------  -----------  ------  -------  ----------  -----------------",
+      "service_nw01  eth1             10  BACKUP          100  5s",
+      "service_nw02  eth2             20  BACKUP          100  5s"
+    ]
+  ]
+}

@@ -1,0 +1,41 @@
+# test
+
+{{ var1 }}
+
+{{ var2.sub }} 
+
+{{ var2["sub"] }}
+
+---
+
+{% for lt in loop_test %}
+## {{ lt.title }}
+
+- {{ lt.content }}
+{% if llt.flatg is true %}
+- フラグ
+{% endif %}
+{% if loop.last is true %}
+- おわり
+{% endif %}
+
+{% endfor %}
+
+---
+## test
+
+{% for sb in sub_loop %}
+{%  for sbid in sb.sub_id%}
+- {{ sb.main_id }}-{{ sbid }}
+{%  endfor %}
+{% endfor %}
+
+---
+
+{% for mb in members %}
+{%  if mb == "admin" %}
+- adminとしてログインしています
+{%  else %}
+- 該当しないユーザーです
+{%  endif %}
+{% endfor %}

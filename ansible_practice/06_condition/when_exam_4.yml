@@ -1,0 +1,21 @@
+---
+- name: sample1
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: make test_exam4.txt on host01
+      ansible.builtin.file:
+        path: "/tmp/test_exam4.txt"
+        state: "touch"
+      register: "result"
+      when: inventory_hostname == "host01"
+
+    - name: Display result
+      ansible.builtin.debug:
+        var: result
+
+    - name: Confirm result
+      debug:
+        msg: "make success text!"
+      when: inventory_hostname == 'host01' and result is succeeded

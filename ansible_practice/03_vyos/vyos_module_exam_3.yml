@@ -1,0 +1,25 @@
+---
+- name: sample
+  hosts: vyos
+  gather_facts: false
+
+  tasks:
+    - name: "Check host version"
+      vyos.vyos.vyos_command:
+        commands:
+          - show version
+      register: "show_version" 
+
+    - name: "Display host version" 
+      ansible.builtin.debug:
+        var: show_version
+
+    - name: "check ip route"
+      vyos.vyos.vyos_command:
+        commands:
+          - show ip route
+      register: "show_ip_route" 
+
+    - name: "Display ip route" 
+      ansible.builtin.debug:
+        var: show_ip_route

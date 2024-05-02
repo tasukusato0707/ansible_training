@@ -1,0 +1,11 @@
+---
+- name: exam1
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: 
+      vyos_command:
+        commands:
+          - show configuration
+      when: ■■■

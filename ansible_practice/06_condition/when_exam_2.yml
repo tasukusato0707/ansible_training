@@ -1,0 +1,9 @@
+---
+- name: exam2
+  hosts: all
+
+  tasks:
+    - name: exam2 playbook
+      debug:
+        msg: "exam2 playbook test!!"
+      when: "'RedHat' in ansible_distribution or 'CentOS' in ansible_distribution"

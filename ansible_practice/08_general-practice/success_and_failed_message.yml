@@ -1,0 +1,40 @@
+---
+- name: "Change vrrp priority to normal value on vyos01"
+  vyos.vyos.vyos_config:
+    lines:
+      - "set high-availability vrrp group service_nw01 priority 254"
+      - "set high-availability vrrp group service_nw02 priority 254"
+  when: 
+    - inventory_hostname == "vyos01"
+  ignore_errors: true
+  register: result_normal
+
+- name: Confirm result_normal result
+  debug:
+    msg: "succeeded!"
+  when: inventory_hostname == 'vyos01' and result_normal is succeeded
+
+- name: Confirm result_normal result
+  debug:
+    msg: "failed!"
+  when: inventory_hostname == 'vyos01' and result_normal is failed
+
+- name: "Change vrrp priority to abnormal value on vyos01"
+  vyos.vyos.vyos_config:
+    lines:
+      - "set high-availability vrrp group service_nw01 priority 893"
+      - "set high-availability vrrp group service_nw02 priority 893"
+  when: 
+    - inventory_hostname == "vyos01"
+  ignore_errors: true
+  register: result_abnormal
+
+- name: Confirm result_abnormal result if it succeeded
+  debug:
+    msg: "succeeded!"
+  when: inventory_hostname == 'vyos01' and result_abnormal is succeeded
+
+- name: Confirm result_abnormal result if it failed
+  debug:
+    msg: "failed!"
+  when: inventory_hostname == 'vyos01' and result_abnormal is failed

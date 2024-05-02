@@ -1,0 +1,26 @@
+---
+- name: sample
+  hosts: vyos01
+  gather_facts: false
+
+  tasks:
+    - name: "Check interfaces description"
+      vyos.vyos.vyos_command:
+        commands:
+          - show interfaces
+          - show ip route
+      register: "show_interfaces_status" 
+
+    - name: "Debug interfaces description" 
+      ansible.builtin.debug:
+        var: show_interfaces_status
+
+    - name: "Create vyos01_show_ip_route.log"
+      ansible.builtin.file:
+        path: /home/ec2-user/ansible_on_vyos/ansible_practice/04-2_copy_file/vyos01_show_ip_route.log
+        state: touch
+
+    - name: "Copy exam3.txt to copy_directory"
+      ansible.builtin.copy:
+        content: "{{ show_interfaces_status.stdout[0] }}" # stdoutとstdout_linesの理解
+        dest: /home/ec2-user/ansible_on_vyos/ansible_practice/04-2_copy_file/vyos01_show_ip_route.log

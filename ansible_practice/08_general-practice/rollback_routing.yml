@@ -1,0 +1,34 @@
+---
+- name: "check pre_interfaces description"
+  vyos.vyos.vyos_command:
+    commands:
+      - show interfaces
+      - show ip route
+      - show vrrp
+  register: "show_current_status"
+
+- name: "debug before description" 
+  ansible.builtin.debug:
+    var: show_current_status.stdout_lines
+
+- name: "Remove vrrp priority on vyos01"
+  vyos.vyos.vyos_config:
+    lines:
+      - "set high-availability vrrp group service_nw01 priority 150"
+      - "set high-availability vrrp group service_nw02 priority 150"
+  register: remove_priority
+  when: inventory_hostname == "vyos01"
+
+- name: "check after_interfaces description"
+  vyos.vyos.vyos_command:
+    commands:
+      - show interfaces
+      - show ip route
+      - show vrrp
+  register: "show_rollback_status" 
+
+- name: "debug after description" 
+  ansible.builtin.debug:
+    var: show_rollback_status
+  when: 
+    - inventory_hostname == "vyos01"

@@ -1,0 +1,4 @@
+.venv/
+execution_environment/context
+ansible-navigator.log
+poetry.lock

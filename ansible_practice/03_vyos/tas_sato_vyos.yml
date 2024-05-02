@@ -1,0 +1,47 @@
+---
+- name: sample
+  hosts: vyos
+  gather_facts: false
+
+  tasks:
+    - name: "check pre_interfaces description"
+      vyos.vyos.vyos_command:
+        commands:
+          - show interfaces
+      register: "show_pre_status" 
+
+    - name: "debug interfaces description" 
+      ansible.builtin.debug:
+        var: show_pre_status
+
+    - name: "setting interfaces description"
+      vyos.vyos.vyos_config:
+        lines:
+          - set interfaces ethernet eth1 description vyos_config-test1
+          - set interfaces ethernet eth2 description vyos_config-test2
+
+    - name: "check after_interfaces description" 
+      vyos.vyos.vyos_command:
+        commands:
+          - show interfaces
+      register: "show_after_status"
+
+    - name: "debug after_interfaces description" 
+      ansible.builtin.debug:
+        var: show_after_status
+
+    - name: "delete interfaces description" 
+      vyos.vyos.vyos_config:
+        lines:
+          - delete interfaces ethernet eth1 description vyos_config-test1
+          - delete interfaces ethernet eth2 description vyos_config-test2
+
+    - name: "check interfaces description" 
+      vyos.vyos.vyos_command:
+        commands:
+          - show interfaces
+      register: "restore_status"
+
+    - name: "debug interfaces description" 
+      ansible.builtin.debug:
+        var: restore_status

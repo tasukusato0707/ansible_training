@@ -1,0 +1,28 @@
+---
+- name: "check show description"
+  vyos.vyos.vyos_command:
+    commands:
+      - show interfaces
+      - show ip route
+      - show vrrp
+  register: show_pre_status
+
+- name: "debug before description" 
+  ansible.builtin.debug:
+    var: show_pre_status.stdout_lines
+
+- name: create __dest_path
+  ansible.builtin.set_fact:
+    __dest_path: "/home/ec2-user/ansible_on_vyos/ansible_practice/08_general-practice/before/"
+
+- name: make directory
+  ansible.builtin.file:
+    path: "{{ __dest_path }}/{{ inventory_hostname }}"
+    state: directory
+  delegate_to: localhost
+
+- name: copy_show_commands
+  ansible.builtin.copy:
+    content: "{{ show_pre_status | to_nice_json(indent=2) }}"
+    dest: "{{ __dest_path }}/{{ inventory_hostname }}/{{ inventory_hostname }}.json"
+  delegate_to: localhost

@@ -1,0 +1,13 @@
+---
+- name: exam3
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: set_fact
+      set_fact:
+        test_hostname: "vyos01"
+
+    - name: debug test_hostname
+      debug:
+        var: test_hostname

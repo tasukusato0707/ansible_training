@@ -1,0 +1,13 @@
+---
+- name: 08_general-practice
+  hosts: vyos
+  gather_facts: false
+  tasks:
+    # 問題1
+    - include_tasks: change_routing.yml
+    # 問題2
+    - include_tasks: output_show_commands.yml
+    # 問題3
+    - include_tasks: success_and_failed_message.yml
+    # Rollback
+    - include_tasks: rollback_routing.yml

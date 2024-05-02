@@ -1,0 +1,34 @@
+---
+- name: sample
+  hosts: localhost
+  gather_facts: false
+  vars:
+    var1: "foo"
+    var2:
+      sub: "var"
+    loop_test:
+      - title: "title 1"
+        content: "content 1"
+        flag: true
+      - title: "title 2"
+        content: "content 2"
+        flag: false
+    sub_loop:
+      - main_id: 1
+        sub_id:
+          - 1
+          - 2
+      - main_id: 2
+        sub_id:
+          - 3
+          - 4
+    members:
+      - admin
+      - user1
+      - user2
+      - other
+  tasks:
+    - name: output
+      ansible.builtin.template:
+        src: "template_test_md.j2"
+        dest: "{{ playbook_dir }}/output/template_test.md"
